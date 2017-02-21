@@ -1,0 +1,64 @@
+Required softwares : 
+
+ java 7
+ tomcat 7
+ eclipse juno
+ maven 
+
+
+Purpose of project
+
+Design and implement a simple rest API for a discography application
+The api  should be capable of  handling artists with their albums and tracks in the album.
+Application should allow CRUD operations via REST API and use Java EE and Maven. 
+It’s not required to have a client for the API. 
+
+Classes used
+
+Album.java
+AlbumController.java
+AlbumService.java
+
+Album.java : Simple bean consisting of properties and their getters and setters
+	int id;
+	String artist;	
+	String album;
+	int year;
+	ArrayList<String> tracks;
+	
+	
+AlbumService.java : A helper class used to provide values which are stored statically. 
+methods to be implemented :
+	1.public List<Album> getAllAlbums()
+	2.public Album getAlbum(int id)
+	3.public Album addAlbum(Album album)
+	4.public Album updateAlbum(Album album)
+	5.public void deleteAlbum(int id)
+Above methods make use of a collection containing discography details 
+and perform basic operations on collection such as collection.get(),collection.put() and collection.remove() to implement corresponding
+CRUD operations.
+
+
+AlbumController.java : Controller class which consists of the business codes.
+methods to be implemented :
+	1.@GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public Album getAlbumById(@PathParam("id") int id)
+	
+	2.@POST
+    @Produces(MediaType.APPLICATION_JSON)
+	public Album addAlbum(Album album)
+	
+	3.@PUT
+    @Produces(MediaType.APPLICATION_JSON)
+	public Album updateAlbum(Album album)
+	
+	4.@DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public void deleteAlbum(@PathParam("id") int id)
+
+Using @Path at class level and method level sets path to base URL + /your_path_at_class_level+ /your_path_at_method_level
+
+@Produces defines which MIME type is delivered by a method annotated with @GET. 
